@@ -1,0 +1,20 @@
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+body {
+  color : white;
+  font-family : "Monaco", Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: white;
+}
