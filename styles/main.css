@@ -18,3 +18,10 @@ body {
 a {
   color: white;
 }
+
+.container {
+  position: relative;
+  border-radius: 5px;
+  background-color: azure;
+/* padding: 20px 0 30px 0; */
+}
