@@ -8,10 +8,158 @@
             </title>
         </head>
         <body>
-            <h1 style="color: black;">
-                <center>
-                    To Do
-                </center>
-            </h1>
-            <button type="button" onclick="window.location.href='todoAdd.html';">Add Tasks</button>
+            <div class = "row">
+                <div class="column">
+                    &nbsp;
+                    <!--Empty Column-->
+                </div>
+
+                <div class="column">
+                    <h1 style="color:black;">
+                        <center>
+                            To Do List
+                        </center>
+                    </h1>
+                </div>
+
+                <div class="column" align="right">
+                    <!--sign in button-->
+                    <button type="button" style="height: 25px; width: 100px;"
+                    onclick="window.location.href='signInPage.html';">Sign In</button>
+                </div>
+            </div>
+            <ul>
+                <li><a class="active" href="home.html">Home</a></li>
+                <li><a href="classSchedule.html">Classes</a></li>
+                <li><a href="todo.html">To Do</a></li>
+                <li><a href="favorites.html">Favorites</a></li>
+            </ul>
+            <!-- <button type="button" onclick="window.location.href='todoAdd.html';">Add Tasks</button> -->
+            
+            
+            <script>
+                function setFocus(){
+                  document.getElementById("taskdesc").focus();
+                }
+            </script>
+              
+            </head>
+              
+            <body onfocus=""> 
+              
+                <!-- 4. bootstrap requires a containing element to wrap site contents.
+                        There are two container classes to choose from (based on the above css bootstrap):
+                        (1) .container class provides a responsive fixed width container
+                        (2) .container-fluid class provides a full width container, spanning
+                            the entire width of the view point
+                        
+                        Bootstrap typically requires 3 main items: 
+                        - container, row, and column to nest the page contents 
+                 -->
+                <div class="container" style="background-color: white; color: black;">
+                  <h1>To Do</h1>
+                  
+                <!-- 5. use bootstrap form layouts
+                        Bootstrap provides three types of form layouts: 
+                          - verical form (default)
+                          - horizontal form
+                          - inline form
+                        Standard rules for all three form layouts: 
+                          - wrap labels and form controls in <div class="form-group">
+                            (needed for optimum spacing) 
+                          - add class .form-control to all textual <input>, <textarea>, 
+                            and <select> elements
+                   --> 
+                   
+                  <!-- <label> tag defines a label for an <input> element.
+                       It does not render as anything special for the user. 
+                       It provides a usability improvement for mouse useres, because 
+                       if the user clicks on the text within the <label> element,
+                       it toggles the control. 
+                       The for attribute of the <label> tag should be equal to the id attribute
+                       of the related element to bind them together. 
+                   -->
+                             
+                <!-- 6. Create a form that allows a user to enter tasks -->
+              
+                  <form name="mainform" >
+                  
+                    <div class="form-group">
+                      <label for="taskdesc">Task Description</label>
+                      <input type="text" id="taskdesc" class="form-control" name="desc" />
+                      <span class="error" id="taskdesc-note"></span>        
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="duedate">Due date</label>  
+                      <input type="text" id="duedate" class="form-control" />  
+                      <span class="error" id="duedate-note"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="priority">Priority</label>
+                      <select id="priority" class="form-control" >
+                        <option value="normal" selected="selected" >Normal</option>  <!-- set default selection -->
+                        <option value="high">High</option>
+                      </select>
+                    </div>     
+                              
+                    <input type="button" class="btn btn-light" id="add" value="Add Task" onclick="addRow()"/> 
+                  </form>
+              
+                  <br/>
+                  
+                <!-- 7. display the "to do" list. 
+                     One obvious, simple approach is to display the list using a table
+                -->
+                    
+                <!-- A basic Bootstrap table has a light padding and horizontal dividers.
+                     To use the basic style, use .table class.   
+                -->      
+                  <div id="todo">
+                    <table id="todoTable" class="table" >
+                      <thead>   <!-- set table headers -->
+                        <tr>
+                          <th>Task Description</th>
+                          <th>Due Date</th>
+                          <th>Priority</th>
+                          <th>(Remove)</th>
+                        </tr> 
+                      </thead>
+              
+                      <!-- 8. write JS to dynamically create add new row upon form submission -->
+                      <script>
+                        function addRow(){
+                          var task = document.getElementById("taskdesc").value;
+                          var duedate = document.getElementById("duedate").value;
+                          var priority = document.getElementById("priority").value;
+                          var deleteBut = "<input type:=button value='  X  ' onClick='delRow()'>";
+                          //array containing the row data
+                          var rowdata = [task, duedate, priority, deleteBut];
+              
+                          var tableRef = document.getElementById("todoTable");
+                          var newRow = tableRef.insertRow(tableRef.rows.length);
+                          newRow.onmouseover = function() {         
+                      tableRef.clickedRowIndex = this.rowIndex;     
+                      };
+                        var newCell = "";       
+                        var i = 0;          // In this example, each row has 4 columns. 
+                          // Use insertCell(index) method to insert new cells (<td> elements) at the 1st, 2nd, 3rd position of the new <tr> element        	      
+                        while (i < 4){
+                            newCell = newRow.insertCell(i);            // specify which column 
+                            newCell.innerHTML = rowdata[i];            // assign what content  
+                            newCell.onmouseover = this.rowIndex;       // attach row index to the row
+                            i++;
+                            }
+                        }
+              
+              
+                        function delRow(){
+                          document.getElementById("todoTable").deleteRow(document.getElementById("todoTable").clickedRowIndex)
+                        }
+                      </script>
+                      
+                    </table> 
+                  </div>
+                </div> 
         </body>
