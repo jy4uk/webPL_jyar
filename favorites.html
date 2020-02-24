@@ -2,6 +2,7 @@
     <html>
         <head>
             <link rel="stylesheet" href="styles/main.css">
+            <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />  -->
             <meta charset="UTF-8">
             <title>
                 Favorites
@@ -34,4 +35,87 @@
                 <li><a href="todo.html">To Do</a></li>
                 <li><a href="favorites.html">Favorites</a></li>
             </ul>
+
+
+
+            <div class="container">
+                <!-- <h1>Favorites</h1> -->
+            
+                <form name="mainform" >
+                
+                  <div class="form-group">
+                    <label for="name-of-site">Name of Site</label>
+                    <input type="text" id="name-of-site" class="form-control" name="desc" />
+                    <span class="error" id="name-of-site-note"></span>        
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="link">Link</label>  
+                    <input type="text" id="link" class="form-control" />  
+                    <span class="error" id="link-note"></span>
+                  </div>
+                            
+                  <input type="button" class="btn btn-light" id="add" value="Add Favorite" onclick="addRow()"/> 
+                </form>
+            
+                <br/>
+ 
+                <div id="favorites">
+                  <table id="favoritesTable" class="table" >
+                    <thead>   <!-- set table headers -->
+                      <tr>
+                        <th>Shortcuts</th>
+                        <th>(Remove)</th>
+                      </tr> 
+                      <tr>
+                          <td onclick="location.href=document.getElementById"></td>
+                      </tr>
+                    </thead>
+            
+                    <!-- 8. write JS to dynamically create add new row upon form submission -->
+                    <script>
+                      function addRow(){
+                        var siteName = document.getElementById("name-of-site").value;
+                        // var siteLink = document.getElementById("link").value;
+                        // siteName.href = ("http://" + siteLink);
+                        // siteName.innerHTML = siteLink;
+                        
+                        var deleteBut = "<input type:=button value='  X  ' onClick='delRow()'>";
+                        //array containing the row data
+                        var rowdata = [siteName, deleteBut];
+            
+                        var tableRef = document.getElementById("favoritesTable");
+                        var newRow = tableRef.insertRow(tableRef.rows.length);
+                        newRow.onmouseover = function() {         
+                    tableRef.clickedRowIndex = this.rowIndex;     
+                    };
+                      var newCell = "";       
+                      var i = 0;          // In this example, each row has 4 columns. 
+                        // Use insertCell(index) method to insert new cells (<td> elements) at the 1st, 2nd, 3rd position of the new <tr> element        	      
+                      while (i < 2){
+                          newCell = newRow.insertCell(i);            // specify which column 
+                        //   newCell.innerHTML = rowdata[i];            // assign what content 
+                        // if(i == 0) {
+
+                        // } 
+                        // else {
+                            newCell.innerHTML = rowdata[i];
+                            // newCell.innerHTML.href = document.getElementById("link").value;
+                            // newCell.innerHTML = rowdata[i] +"<a href='"+document.getElementById("link").value+"'>rowdata[i]</a>";
+                        // }
+                          newCell.onmouseover = this.rowIndex;       // attach row index to the row
+                          i++;
+                          }
+                      }
+            
+            
+                      function delRow(){
+                        document.getElementById("todoTable").deleteRow(document.getElementById("todoTable").clickedRowIndex)
+                      }
+                    </script>
+                    
+                  </table> 
+                </div>
+              </div> 
+
         </body>

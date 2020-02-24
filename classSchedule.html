@@ -44,16 +44,32 @@
                 </div>
                 <div class="form-group">
                     <label for="start-time">Start Time</label>
-                    <input type="time" id="start-time" class="form-control" required />
+                    <input type="time" id="start-time" class="form-control" name="desc" required />
                     <span class="error" id="start-time=note"></span>
                 </div>
                 <div class="form-group"> <!--NEED TO MAKE SURE THE END TIME IS AFTER THE START TIME-->
                     <label for="end-time">End Time</label>
-                    <input type="time" id="end-time" class="form-control" required />
+                    <input type="time" id="end-time" class="form-control" name="desc" required />
                     <span class="error" id="end-time=note"></span>
                 </div>
                 <div class="form-group">
-                    
+                    <label for="days-of-week">Which Days?</label>
+                    <input type="checkbox" id="days-of-week" name="desc" value="Monday">Monday
+                    <input type="checkbox" id="days-of-week" name="desc" value="Tuesday">Tuesday
+                    <input type="checkbox" id="days-of-week" name="desc" value="Wednesday">Wednesday
+                    <input type="checkbox" id="days-of-week" name="desc" value="Thursday">Thursday
+                    <input type="checkbox" id="days-of-week" name="desc" value="Friday">Friday
                 </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" class="form-control" name="desc" />
+                </div>
+
+                <input type="button" class="btn btn-light" id="add" value="Add Class" onclick="addClass()"/> 
             </form>
+
+
+            <!-- <script>
+                ADD CLASS FUNCTION
+            </script> -->
         </body>
