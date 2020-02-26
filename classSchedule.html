@@ -2,10 +2,29 @@
     <html>
         <head>
             <link rel="stylesheet" href="styles/main.css">
+            <link href='styles/fullcalendar-4/packages/core/main.css' rel='stylesheet' />
+            <link href='styles/fullcalendar-4/packages/daygrid/main.css' rel='stylesheet' />
             <meta charset="UTF-8">
             <title>
                 Class Schedule
             </title>
+
+            <script src='styles/fullcalendar-4/packages/core/main.js'></script>
+            <script src='styles/fullcalendar-4/packages/daygrid/main.js'></script>
+
+            <script>
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: [ 'dayGrid' ]
+                });
+
+                calendar.render();
+            });
+
+            </script>
         </head>
         <body>
             <div class = "row">
@@ -36,7 +55,7 @@
             </ul>
 
             <!-- ADD CLASSES -->
-            <form name="mainform">
+            <!-- <form name="mainform">
                 <div class="form-group">
                     <label for="classname">Class Name</label>
                     <input type="text" id="classname" class="form-control" name="desc" required />
@@ -47,7 +66,7 @@
                     <input type="time" id="start-time" class="form-control" name="desc" required />
                     <span class="error" id="start-time=note"></span>
                 </div>
-                <div class="form-group"> <!--NEED TO MAKE SURE THE END TIME IS AFTER THE START TIME-->
+                <div class="form-group"> 
                     <label for="end-time">End Time</label>
                     <input type="time" id="end-time" class="form-control" name="desc" required />
                     <span class="error" id="end-time=note"></span>
@@ -66,10 +85,74 @@
                 </div>
 
                 <input type="button" class="btn btn-light" id="add" value="Add Class" onclick="addClass()"/> 
-            </form>
+            </form> -->
+            <div id='calendar'></div>
 
-
-            <!-- <script>
-                ADD CLASS FUNCTION
-            </script> -->
+            <!-- ----------------- -->
+            <script>
+            // document.addEventListener('DOMContentLoaded', function() {
+            //     var calendarEl = document.getElementById('calendar');
+              
+            //     var calendar = new FullCalendar.Calendar(calendarEl, {
+            //       plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+            //       defaultView: 'dayGridMonth',
+            //       defaultDate: '2020-02-07',
+            //       header: {
+            //         left: 'prev,next today',
+            //         center: 'title',
+            //         right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            //       },
+            //       events: [
+            //         {
+            //           title: 'All Day Event',
+            //           start: '2020-02-01'
+            //         },
+            //         {
+            //           title: 'Long Event',
+            //           start: '2020-02-07',
+            //           end: '2020-02-10'
+            //         },
+            //         {
+            //           groupId: '999',
+            //           title: 'Repeating Event',
+            //           start: '2020-02-09T16:00:00'
+            //         },
+            //         {
+            //           groupId: '999',
+            //           title: 'Repeating Event',
+            //           start: '2020-02-16T16:00:00'
+            //         },
+            //         {
+            //           title: 'Conference',
+            //           start: '2020-02-11',
+            //           end: '2020-02-13'
+            //         },
+            //         {
+            //           title: 'Meeting',
+            //           start: '2020-02-12T10:30:00',
+            //           end: '2020-02-12T12:30:00'
+            //         },
+            //         {
+            //           title: 'Lunch',
+            //           start: '2020-02-12T12:00:00'
+            //         },
+            //         {
+            //           title: 'Meeting',
+            //           start: '2020-02-12T14:30:00'
+            //         },
+            //         {
+            //           title: 'Birthday Party',
+            //           start: '2020-02-13T07:00:00'
+            //         },
+            //         {
+            //           title: 'Click for Google',
+            //           url: 'http://google.com/',
+            //           start: '2020-02-28'
+            //         }
+            //       ]
+            //     });
+              
+            //     calendar.render();
+            //   });
+            </script>
         </body>
