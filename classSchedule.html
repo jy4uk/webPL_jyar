@@ -2,30 +2,18 @@
     <html>
         <head>
             <link rel="stylesheet" href="styles/main.css">
-            <link href='styles/fullcalendar-4/packages/core/main.css' rel='stylesheet' />
-            <link href='styles/fullcalendar-4/packages/daygrid/main.css' rel='stylesheet' />
+            <link href="https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
+        
+            <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+            
+
             <meta charset="UTF-8">
             <title>
                 Class Schedule
             </title>
 
-            <script src='styles/fullcalendar-4/packages/core/main.js'></script>
-            <script src='styles/fullcalendar-4/packages/daygrid/main.js'></script>
-
-            <script>
-
-            document.addEventListener('DOMContentLoaded', function() {
-                var calendarEl = document.getElementById('calendar');
-
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: [ 'dayGrid' ]
-                });
-
-                calendar.render();
-            });
-
-            </script>
         </head>
+
         <body>
             <div class = "row">
                 <div class="column">
@@ -55,6 +43,10 @@
             </ul>
 
             <!-- ADD CLASSES -->
+            <div id="wrapper">
+                <div id="myScheduler"></div>
+              </div>
+
             <!-- <form name="mainform">
                 <div class="form-group">
                     <label for="classname">Class Name</label>
@@ -86,73 +78,36 @@
 
                 <input type="button" class="btn btn-light" id="add" value="Add Class" onclick="addClass()"/> 
             </form> -->
-            <div id='calendar'></div>
 
-            <!-- ----------------- -->
+            <!-- <div id='calendar'></div> -->
+
             <script>
-            // document.addEventListener('DOMContentLoaded', function() {
-            //     var calendarEl = document.getElementById('calendar');
-              
-            //     var calendar = new FullCalendar.Calendar(calendarEl, {
-            //       plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
-            //       defaultView: 'dayGridMonth',
-            //       defaultDate: '2020-02-07',
-            //       header: {
-            //         left: 'prev,next today',
-            //         center: 'title',
-            //         right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            //       },
-            //       events: [
-            //         {
-            //           title: 'All Day Event',
-            //           start: '2020-02-01'
-            //         },
-            //         {
-            //           title: 'Long Event',
-            //           start: '2020-02-07',
-            //           end: '2020-02-10'
-            //         },
-            //         {
-            //           groupId: '999',
-            //           title: 'Repeating Event',
-            //           start: '2020-02-09T16:00:00'
-            //         },
-            //         {
-            //           groupId: '999',
-            //           title: 'Repeating Event',
-            //           start: '2020-02-16T16:00:00'
-            //         },
-            //         {
-            //           title: 'Conference',
-            //           start: '2020-02-11',
-            //           end: '2020-02-13'
-            //         },
-            //         {
-            //           title: 'Meeting',
-            //           start: '2020-02-12T10:30:00',
-            //           end: '2020-02-12T12:30:00'
-            //         },
-            //         {
-            //           title: 'Lunch',
-            //           start: '2020-02-12T12:00:00'
-            //         },
-            //         {
-            //           title: 'Meeting',
-            //           start: '2020-02-12T14:30:00'
-            //         },
-            //         {
-            //           title: 'Birthday Party',
-            //           start: '2020-02-13T07:00:00'
-            //         },
-            //         {
-            //           title: 'Click for Google',
-            //           url: 'http://google.com/',
-            //           start: '2020-02-28'
-            //         }
-            //       ]
-            //     });
-              
-            //     calendar.render();
-            //   });
+                YUI().use(
+                    'aui-scheduler',
+                    function(Y) {
+                        var events = [
+                            {
+                                
+                            }
+                        ];
+
+                        var eventRecorder = new Y.SchedulerEventRecorder();
+                        var weekView = new Y.SchedulerWeekView();
+                        var monthView = new Y.SchedulerMonthView();
+                        var agendaView = new Y.SchedulerAgendaView();
+
+                        new Y.Scheduler(
+                            {
+                                boundingBox: '#myScheduler',
+                                activeView: weekView,
+                                date: new Date(2013, 1, 4),
+                                eventRecorder: eventRecorder,
+                                items: events,
+                                render: true,
+                                views: [weekView, monthView, agendaView]
+                            }
+                        );
+                    }
+                );
             </script>
         </body>
