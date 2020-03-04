@@ -2,7 +2,6 @@
     <html>
         <head>
             <link rel="stylesheet" href="styles/main.css">
-            <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />  -->
             <meta charset="UTF-8">
             <title>
                 Favorites
@@ -62,19 +61,15 @@
  
                 <div id="favorites">
                   <table id="favoritesTable" class="table" >
-                    <thead>   <!-- set table headers -->
+                    <thead>
                       <tr>
                         <th>Title</th>
                         <th>Link</th>
                         <th>test</th>
                         <th>(Remove)</th>
                       </tr> 
-                      <!-- <tr>
-                          <td onclick="location.href=document.getElementById"></td>
-                      </tr> -->
                     </thead>
             
-                    <!-- 8. write JS to dynamically create add new row upon form submission -->
                     <script>
                       function addRow(){
                         var siteName = document.getElementById("name-of-site").value;
@@ -93,34 +88,22 @@
                         }());
                         
                         var deleteBut = "<input type:=button value='  X  ' onClick='delRow()'>";
-                        // var siteTest = "<a href= onClick='location.href=siteLink'>siteName</a>";
-                        // var siteTest = "<p id='(siteName)' onClick='window.location.href='(siteLink)''>siteName</p>";
-                        // var siteTest = "<input type='button' value='$(siteName)' onClick='openLink(siteLink)'/>";
-                        var siteTest = "<p id='hyperlinker' >" + siteName + "</p>"
-                        
-
-                        // var siteTestlink=siteTest.document.getElementById("hyperlinker").write('<a href="' + siteLink + '">' + siteName + '</a>');
-                        //array containing the row data)
+                        var siteTest = "<p id='hyperlinker' style='color:black;'>" + siteName + "</p>"    
                         var rowdata = [siteName, siteLink, siteTest, deleteBut];
             
                         var tableRef = document.getElementById("favoritesTable");
                         var newRow = tableRef.insertRow(tableRef.rows.length);
+                        // arrow function to add row to table
                         newRow.onmouseover = () => {tableRef.clickedRowIndex = this.rowIndex}
                         var newCell = "";       
-                        var i = 0;          // In this example, each row has 4 columns. 
-                        // Use insertCell(index) method to insert new cells (<td> elements) at the 1st, 2nd, 3rd position of the new <tr> element        	      
+                        var i = 0;         
                         while (i < 4){
-                          newCell = newRow.insertCell(i);            // specify which column 
-                        //   newCell.innerHTML = rowdata[i];            // assign what content 
-                            
-                            newCell.innerHTML = rowdata[i];
-                            // newCell.innerHTML.href = document.getElementById("link").value;
-                            // newCell.innerHTML = rowdata[i] +"<a href='"+document.getElementById("link").value+"'>rowdata[i]</a>";
-                        // }
-                          newCell.onmouseover = this.rowIndex;       // attach row index to the row
+                          newCell = newRow.insertCell(i);           
+                          newCell.innerHTML = rowdata[i];
+                          newCell.onmouseover = this.rowIndex;     
                           i++;
                         }
-                        document.getElementById("hyperlinker").innerHTML = "<a href='" + siteLink + "'>" + siteName + "</a>";
+                        document.getElementById("hyperlinker").innerHTML = "<a href='" + siteLink + "' style='color:black'>" + siteName + "</a>";
 
                         document.getElementById("name-of-site").value = '';
                         document.getElementById("link").value = '';

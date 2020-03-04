@@ -15,16 +15,6 @@
 </head>
 
 <body onfocus=""> 
-
-  <!-- 4. bootstrap requires a containing element to wrap site contents.
-          There are two container classes to choose from (based on the above css bootstrap):
-          (1) .container class provides a responsive fixed width container
-          (2) .container-fluid class provides a full width container, spanning
-              the entire width of the view point
-          
-          Bootstrap typically requires 3 main items: 
-          - container, row, and column to nest the page contents 
-   -->
   <div class="container">
     <h1>To Do</h1>
 
@@ -72,7 +62,6 @@
             var duedate = document.getElementById("duedate").value;
             var priority = document.getElementById("priority").value;
             var deleteBut = "<input type:=button value='  X  ' onClick='delRow()'>";
-            //array containing the row data
             var rowdata = [task, duedate, priority, deleteBut];
 
             var tableRef = document.getElementById("todoTable");
@@ -81,12 +70,11 @@
         tableRef.clickedRowIndex = this.rowIndex;     
         };
           var newCell = "";       
-          var i = 0;          // In this example, each row has 4 columns. 
-            // Use insertCell(index) method to insert new cells (<td> elements) at the 1st, 2nd, 3rd position of the new <tr> element        	      
+          var i = 0;          
           while (i < 4){
-              newCell = newRow.insertCell(i);            // specify which column 
-              newCell.innerHTML = rowdata[i];            // assign what content  
-              newCell.onmouseover = this.rowIndex;       // attach row index to the row
+              newCell = newRow.insertCell(i);         
+              newCell.innerHTML = rowdata[i];         
+              newCell.onmouseover = this.rowIndex;      
               i++;
               }
           }
