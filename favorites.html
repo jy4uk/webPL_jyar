@@ -103,9 +103,7 @@
             
                         var tableRef = document.getElementById("favoritesTable");
                         var newRow = tableRef.insertRow(tableRef.rows.length);
-                        newRow.onmouseover = function() {         
-                            tableRef.clickedRowIndex = this.rowIndex;     
-                        };
+                        newRow.onmouseover = () => {tableRef.clickedRowIndex = this.rowIndex}
                         var newCell = "";       
                         var i = 0;          // In this example, each row has 4 columns. 
                         // Use insertCell(index) method to insert new cells (<td> elements) at the 1st, 2nd, 3rd position of the new <tr> element        	      
@@ -121,15 +119,10 @@
                           i++;
                         }
                         document.getElementById("hyperlinker").innerHTML = "<a href='" + siteLink + "'>" + siteName + "</a>";
-                        
+
                         document.getElementById("name-of-site").value = '';
                         document.getElementById("link").value = '';
                       }
-
-                    //   function openLink(siteLink) {
-                    //       console.log(siteLink);
-                    //     document.getElementById('testing').innerHTML = siteLink;
-                    //   }
 
                       function delRow(){
                         document.getElementById("favoritesTable").deleteRow(document.getElementById("favoritesTable").clickedRowIndex);
