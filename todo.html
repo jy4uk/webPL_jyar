@@ -91,7 +91,7 @@
                     </div>
                     
                     <div class="form-group">
-                      <label for="duedate">Due date</label>  
+                      <label for="duedate">Due Date</label>  
                       <input type="text" id="duedate" class="form-control" />  
                       <span class="error" id="duedate-note"></span>
                     </div>
@@ -99,8 +99,8 @@
                     <div class="form-group">
                       <label for="priority">Priority</label>
                       <select id="priority" class="form-control" >
-                        <option value="normal" selected="selected" >Normal</option>  <!-- set default selection -->
-                        <option value="high">High</option>
+                        <option value="Normal" selected="selected">Normal</option>  <!-- set default selection -->
+                        <option value="High">High</option>
                       </select>
                     </div>     
                               
@@ -140,20 +140,24 @@
                           var tableRef = document.getElementById("todoTable");
                           var newRow = tableRef.insertRow(tableRef.rows.length);
                           newRow.onmouseover = function() {         
-                      tableRef.clickedRowIndex = this.rowIndex;     
-                      };
-                        var newCell = "";       
-                        var i = 0;          // In this example, each row has 4 columns. 
+                            tableRef.clickedRowIndex = this.rowIndex;     
+                          };
+                          var newCell = "";       
+                          var i = 0;          // In this example, each row has 4 columns. 
                           // Use insertCell(index) method to insert new cells (<td> elements) at the 1st, 2nd, 3rd position of the new <tr> element        	      
-                        while (i < 4){
+                          while (i < 4){
                             newCell = newRow.insertCell(i);            // specify which column 
                             newCell.innerHTML = rowdata[i];            // assign what content  
                             newCell.onmouseover = this.rowIndex;       // attach row index to the row
                             i++;
-                            }
+                          }
+                          document.getElementById("taskdesc").value = '';
+                          document.getElementById("duedate").value = '';
+                          document.getElementById("priority").value = '';
+
                         }
-              
-              
+                        
+                        
                         function delRow(){
                           document.getElementById("todoTable").deleteRow(document.getElementById("todoTable").clickedRowIndex)
                         }

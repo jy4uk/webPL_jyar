@@ -64,53 +64,75 @@
                   <table id="favoritesTable" class="table" >
                     <thead>   <!-- set table headers -->
                       <tr>
-                        <th>Shortcuts</th>
+                        <th>Title</th>
+                        <th>Link</th>
+                        <th>test</th>
                         <th>(Remove)</th>
                       </tr> 
-                      <tr>
+                      <!-- <tr>
                           <td onclick="location.href=document.getElementById"></td>
-                      </tr>
+                      </tr> -->
                     </thead>
             
                     <!-- 8. write JS to dynamically create add new row upon form submission -->
                     <script>
                       function addRow(){
                         var siteName = document.getElementById("name-of-site").value;
-                        // var siteLink = document.getElementById("link").value;
-                        // siteName.href = ("http://" + siteLink);
-                        // siteName.innerHTML = siteLink;
+                        var siteLink = document.getElementById("link").value;
+                        
+                        var linker = (function() {
+                            if(siteLink.substring(0,7) != "http://" && siteLink.substring(0,8) != "https://") {
+                                siteLink = "http://" + siteLink;
+                            }
+                            else if(siteLink.substring(0,7) != "http://" && siteLink.substring(0,8) == "https://"){
+                                siteLink = siteLink;
+                            }
+                            else if(siteLink.substring(0,7) == "http://" && siteLink.substring(0,8) != "https://") {
+                                siteLink = siteLink;
+                            }
+                        }());
                         
                         var deleteBut = "<input type:=button value='  X  ' onClick='delRow()'>";
-                        //array containing the row data
-                        var rowdata = [siteName, deleteBut];
+                        // var siteTest = "<a href= onClick='location.href=siteLink'>siteName</a>";
+                        // var siteTest = "<p id='(siteName)' onClick='window.location.href='(siteLink)''>siteName</p>";
+                        // var siteTest = "<input type='button' value='$(siteName)' onClick='openLink(siteLink)'/>";
+                        var siteTest = "<p id='hyperlinker'>" + siteName + "</p>"
+                        // var siteTestlink=siteTest.document.getElementById("hyperlinker").write('<a href="' + siteLink + '">' + siteName + '</a>');
+                        //array containing the row data)
+                        var rowdata = [siteName, siteLink, siteTest, deleteBut];
             
                         var tableRef = document.getElementById("favoritesTable");
                         var newRow = tableRef.insertRow(tableRef.rows.length);
                         newRow.onmouseover = function() {         
-                    tableRef.clickedRowIndex = this.rowIndex;     
-                    };
-                      var newCell = "";       
-                      var i = 0;          // In this example, each row has 4 columns. 
+                            tableRef.clickedRowIndex = this.rowIndex;     
+                        };
+                        var newCell = "";       
+                        var i = 0;          // In this example, each row has 4 columns. 
                         // Use insertCell(index) method to insert new cells (<td> elements) at the 1st, 2nd, 3rd position of the new <tr> element        	      
-                      while (i < 2){
+                        while (i < 4){
                           newCell = newRow.insertCell(i);            // specify which column 
                         //   newCell.innerHTML = rowdata[i];            // assign what content 
-                        // if(i == 0) {
-
-                        // } 
-                        // else {
+                            
                             newCell.innerHTML = rowdata[i];
                             // newCell.innerHTML.href = document.getElementById("link").value;
                             // newCell.innerHTML = rowdata[i] +"<a href='"+document.getElementById("link").value+"'>rowdata[i]</a>";
                         // }
                           newCell.onmouseover = this.rowIndex;       // attach row index to the row
                           i++;
-                          }
+                        }
+                        document.getElementById("hyperlinker").innerHTML = "<a href='" + siteLink + "'>" + siteName + "</a>";
+                        
+                        document.getElementById("name-of-site").value = '';
+                        document.getElementById("link").value = '';
                       }
-            
-            
+
+                    //   function openLink(siteLink) {
+                    //       console.log(siteLink);
+                    //     document.getElementById('testing').innerHTML = siteLink;
+                    //   }
+
                       function delRow(){
-                        document.getElementById("todoTable").deleteRow(document.getElementById("todoTable").clickedRowIndex)
+                        document.getElementById("favoritesTable").deleteRow(document.getElementById("favoritesTable").clickedRowIndex);
                       }
                     </script>
                     
