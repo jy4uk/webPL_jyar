@@ -63,9 +63,7 @@
                   <table id="favoritesTable" class="table" >
                     <thead>
                       <tr>
-                        <th>Title</th>
-                        <th>Link</th>
-                        <th>test</th>
+                        <th>Shortcut</th>
                         <th>(Remove)</th>
                       </tr> 
                     </thead>
@@ -88,8 +86,8 @@
                         }());
                         
                         var deleteBut = "<input type:=button value='  X  ' onClick='delRow()'>";
-                        var siteTest = "<p id='hyperlinker' style='color:black;'>" + siteName + "</p>"    
-                        var rowdata = [siteName, siteLink, siteTest, deleteBut];
+                        var linkShortcut = "<p id='hyperlinker' style='color:black;'>" + siteName + "</p>"    
+                        var rowdata = [linkShortcut, deleteBut];
             
                         var tableRef = document.getElementById("favoritesTable");
                         var newRow = tableRef.insertRow(tableRef.rows.length);
@@ -97,7 +95,7 @@
                         newRow.onmouseover = () => {tableRef.clickedRowIndex = this.rowIndex}
                         var newCell = "";       
                         var i = 0;         
-                        while (i < 4){
+                        while (i < 2){
                           newCell = newRow.insertCell(i);           
                           newCell.innerHTML = rowdata[i];
                           newCell.onmouseover = this.rowIndex;     
