@@ -1,0 +1,68 @@
+html {
+  font-family: "Monaco", Arial, Helvetica, sans-serif;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+body {
+  color : white;
+  font-family : "Monaco", Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: white;
+}
+
+.container {
+  position: relative;
+  border-radius: 5px;
+  background-color: white;
+/* padding: 20px 0 30px 0; */
+}
+
+table {
+  border-collapse:separate;
+  border-spacing: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* Nav Bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: blue;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: rgb(56, 135, 255);
+}
+
+div {
+  color: black;
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+    <html>
+        <head>
+            <link rel="stylesheet" href="styles/main.css">
+            <meta charset="UTF-8">
+            <title>
+                Create a new account
+            </title>
+            <body>
+                <div class="container">
+                    <form action="/action_page.php">
+                        <div class="row">
+                            <h2 style="text-align: center; color: black;">Create a new account</h2>
+                            <div class = "column">
+                                &nbsp;
+                            </div>
+                            <div class = "column" style="text-align: left;">
+                                <div style="color: black;">
+                                    Username: <input type="text" id="username" name="username" placeholder="Username" required>
+                                </div>
+                                <div style = "color: black;">
+                                    Password: <input type="password" name="password" id="password" placeholder="Password" required>
+                                </div>
+                                
+                                <div style = "color: black;">
+                                    Re-Type Password: <input type="password" id="retypePass" name="password2" placeholder="Password" required>
+                                </div>
+                                <input type="submit" id="submit" value="Create Account">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <script>
+                    //javascript stuff
+                    document.getElementById("submit").addEventListener("click", checkLength);
+                    function checkLength(){
+                        var usernameCheck = document.getElementById("username").value;
+                        var usernameLength = usernameCheck.length;
+                        var passwordCheck = document.getElementById("password").value;
+                        var retypePassword = document.getElementById("retypePass").value;
+                        var passwordLength = passwordCheck.length;
+                        console.log(usernameLength);
+                        console.log(usernameCheck);
+
+                        if (usernameLength < 5 && usernameLength != 0) {
+                            alert("Username is too short. Must be longer than 5 characters.");
+                        }
+                        if(passwordLength < 5 && passwordLength != 0){
+                            alert("Password is too short. Must be longer than 5 characters");
+                        }
+                        if(passwordCheck != retypePassword){
+                            alert("Passwords do not match");
+                        }
+                    }
+                </script>
+                    </div>
+                </div>
+            </body>
+        </head>
