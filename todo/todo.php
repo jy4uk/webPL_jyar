@@ -12,7 +12,7 @@ $action = "list_tasks";        // default action
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="main.css">
-  <title>PHP and database</title>    
+  <title>To Do</title>    
   <style>
     label { width: 120px; }
     textarea { border:1px solid #ddd; }

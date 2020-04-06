@@ -13,7 +13,7 @@
   <h3>Update Task</h3>
   <br/>
   
-  <form action="main.php" method="post">
+  <form action="todo.php" method="post">
    <div class="form-group">
       <label for="taskdesc">Task </label>
       <input type="text" name="taskdesc" class="form-control" name="desc" />
