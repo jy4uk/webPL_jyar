@@ -17,7 +17,7 @@
 //      execute() actually executes the SQL statement
 
 
-function addTask($task, $due, $priority)
+function addTask($username, $task, $due, $priority)
 {
 	global $db;
 	
@@ -26,9 +26,10 @@ function addTask($task, $due, $priority)
 	// since we skip task_id and let DBMS auto gen a running number,
 	// we need to specify the columns to insert values
 	
-	$query = "INSERT INTO todo (task_desc, due_date, priority) VALUES (:task, :due, :priority)";
+	$query = "INSERT INTO todo (username, task_desc, due_date, priority) VALUES (:username, :task, :due, :priority)";
 	
 	$statement = $db->prepare($query);
+	$statement->bindValue(':username', $username);
 	$statement->bindValue(':task', $task);
 	$statement->bindValue(':due', $due);
 	$statement->bindValue(':priority', $priority);
@@ -68,11 +69,12 @@ function deleteTask($id)
 }
 
 
-function getAllTasks()
+function getAllTasks($user)
 {
 	global $db;
-	$query = "SELECT * FROM todo";
+	$query = "SELECT * FROM todo WHERE username=:user";
 	$statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
 	$statement->execute();
 	
 	// fetchAll() returns an array for all of the rows in the result set

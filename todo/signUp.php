@@ -1,14 +1,20 @@
+<?php
+require('connectdb.php');
+require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-db.php');
+
+// $action = "list_tasks";        // default action
+?>
 <!doctype html>
     <html>
         <head>
-            <link rel="stylesheet" href="styles/main.css">
+            <link rel="stylesheet" href="main.css">
             <meta charset="UTF-8">
             <title>
                 Create a new account
             </title>
             <body>
                 <div class="container">
-                    <form action="/action_page.php">
+                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
                         <div class="row">
                             <h2 style="text-align: center; color: black;">Create a new account</h2>
                             <div class = "column">
@@ -19,7 +25,7 @@
                                     Username: <input type="text" id="username" name="username" placeholder="Username" required>
                                 </div>
                                 <div style = "color: black;">
-                                    Password: <input type="password" name="password" id="password" placeholder="Password" required>
+                                    Password: <input type="password" name="pwd" id="password" placeholder="Password" required>
                                 </div>
                                 
                                 <div style = "color: black;">
@@ -42,7 +48,7 @@
                         console.log(usernameLength);
                         console.log(usernameCheck);
 
-                        if (usernameLength < 5 && usernameLength != 0) {
+                        if (usernameLength < 4 && usernameLength != 0) {
                             alert("Username is too short. Must be longer than 5 characters.");
                         }
                         if(passwordLength < 5 && passwordLength != 0){
@@ -55,5 +61,45 @@
                 </script>
                     </div>
                 </div>
+
+                <?php session_start(); 
+                // foreach($_SESSION as $key => $value) {
+                //     echo "<li style='color: black;'> $key : $value </li>";
+                //   }
+                ?>
+                <?php
+                    function reject($entry) {
+                        echo "<li style='color: black;'>Username is already taken. Please enter a different one.</li>";
+                    }
+                  
+                      if($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) >= 5 && strlen($_POST['pwd']) >= 5) {
+                          $user = trim($_POST['username']);
+                          $pwd = trim($_POST['pwd']);
+                        
+                          if(!ctype_alnum($user) || $newUserCheck == "user found") {//ctype_alnum checks if string is made of only alphanumeric characters (true if yes, false if not)
+                            reject('username');
+                          }
+                          else {
+                            if(!empty($_POST['pwd'])) {
+                                if(!ctype_alnum($pwd)) {
+                                    reject('password');
+                                }
+                                
+                                else {
+                                    // $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
+                                    $newUserCheck = newUserSignUp($user, $pwd);
+                                    if($newUserCheck == "new user") {
+                                        $_SESSION['user'] = $user;
+                                        $_SESSION['pwd'] = $hash_pwd;
+                                        header('Location: home.php');
+                                    }
+                                    else {
+                                        reject('password');
+                                    }
+                                }
+                            }
+                          }
+                      }
+                ?>
             </body>
         </head>

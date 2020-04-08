@@ -8,10 +8,14 @@
             </title>
         </head>
         <body>
+            <?php session_start(); ?>
+            <?php
+                if(isset($_SESSION['user'])) {
+            ?>
             <div class = "row">
                 <div class="column">
-                    &nbsp;
-                    <!--Empty Column-->
+                    <!-- &nbsp; -->
+                    <h2>Hi, <?php echo $_SESSION['user'];?>!</h2>
                 </div>
 
                 <div class="column">
@@ -24,8 +28,10 @@
 
                 <div class="column" align="right">
                     <!--sign in button-->
-                    <button type="button" style="height: 25px; width: 100px;"
-                    onclick="window.location.href='signInPage.html';">Sign In</button>
+                    <!-- <button type="button" style="height: 25px; width: 100px;"
+                    onclick="window.location.href='signInPage.html';">Sign In</button> -->
+                    <input type="submit" value="Sign Out" name="sign-out" class="btn"
+                            onclick="window.location.href='signOut.php';"></input>
                 </div>
             </div>
             <ul>
@@ -64,5 +70,14 @@
                     </h2>
                 </div>
             </div>
+
+            <?php
+                }
+                else {
+                   header('Location: signInPage.php'); //blank ;; the above should call some other php files to display all the info for the signed in user
+                }
+            ?>
+           
+
         </body>
     </html>

@@ -17,7 +17,7 @@
 //      execute() actually executes the SQL statement
 
 
-function addFavorite($name, $link)
+function addFavorite($username, $name, $link)
 {
 	global $db;
 	
@@ -32,9 +32,10 @@ function addFavorite($name, $link)
 		$url = $link;
 	}
 
-	$query = "INSERT INTO favorites (name, link) VALUES (:name, :link)";
+	$query = "INSERT INTO favorites (username, name, link) VALUES (:username, :name, :link)";
 	
 	$statement = $db->prepare($query);
+	$statement->bindValue(':username', $username);
 	$statement->bindValue(':name', $name);
 	$statement->bindValue(':link', $url);
 	$statement->execute();     // if the statement is successfully executed, execute() returns true
@@ -79,11 +80,12 @@ function deleteTask($id)
 }
 
 
-function getAllTasks()
+function getAllTasks($username)
 {
 	global $db;
-	$query = "SELECT * FROM favorites";
+	$query = "SELECT * FROM favorites WHERE username=:username";
 	$statement = $db->prepare($query);
+	$statement->bindValue(':username', $username);
 	$statement->execute();
 	
 	// fetchAll() returns an array for all of the rows in the result set
