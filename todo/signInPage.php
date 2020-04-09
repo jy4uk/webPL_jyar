@@ -1,6 +1,6 @@
 <?php
 require('connectdb.php');
-require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-db.php');
+require('signInPage-db.php');
 
 // $action = "list_tasks";        // default action
 ?>
