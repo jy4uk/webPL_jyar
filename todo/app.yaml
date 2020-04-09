@@ -4,4 +4,5 @@ runtime: php73
 # Defaults to "serve index.php" 
 entrypoint: serve home.php
 
-# If your main page is index.php, comment the above entrypoint setting 
+- url: .*
+  script: auto
