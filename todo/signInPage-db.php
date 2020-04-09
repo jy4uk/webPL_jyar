@@ -18,6 +18,8 @@ function getUser_by_username($username)
 	// closes the cursor and frees the connection to the server so other SQL statements may be issued
     $statement->closecursor();
     // echo implode($results) . "<br/> "; //view user and password
+    //echo implode($results);
+    //echo “<h3 style=‘color: black;’>” . implode($results) . “</h3>”;
     if($results == NULL) {
         return false;
     }
@@ -43,15 +45,20 @@ function checkPasswordToUser($username, $password)
     // echo $hash_results . "<br/>";
     // echo $password;
     $statement->closecursor();
-    
-    if($results[0] != $password) {
+    $hashpwd = $results[0];
+    //echo $hashpwd . "<br/>";
+    //echo $password;
+    if(password_verify($password, $hashpwd)) {
+        return true;
+    }
+    else{
         return false;
     }
-	return true;
+	return false;
 	// return $results;
 }
 
-function newUserSignUp($username, $password) {
+function newUserSignUp($username, $hashed_pw) {
     global $db;
 
     $query = "SELECT username FROM users where username = :username";
@@ -68,7 +75,7 @@ function newUserSignUp($username, $password) {
 	
         $statement = $db->prepare($query);
         $statement->bindValue(':username', $username);
-        $statement->bindValue(':password', $password);
+        $statement->bindValue(':password', $hashed_pw);
         $statement->execute();
         $statement->closeCursor();
 

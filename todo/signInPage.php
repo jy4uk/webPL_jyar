@@ -1,6 +1,6 @@
 <?php
 require('connectdb.php');
-require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-db.php');
+require('signInPage-db.php');
 
 // $action = "list_tasks";        // default action
 ?>
@@ -42,14 +42,13 @@ require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-
                           }
                       
                           if($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) > 0) {
-                              // $user = trim($_POST['username']);
                               $user = trim($_POST['username']);
                               $foundUser = getUser_by_username($user);
                               if(!ctype_alnum($user) || !$foundUser) {//ctype_alnum checks if string is made of only alphanumeric characters (true if yes, false if not)
                                 reject('username');
                               }
                               else {
-                                if(!empty($_POST['pwd'])) {
+                                if(isset($_POST['pwd'])) {
                                     $pwd = trim($_POST['pwd']);
                                     
                                     if(!ctype_alnum($pwd)) {
@@ -57,10 +56,9 @@ require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-
                                     }
                                     
                                     else {
-                                    $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-                                    // $foundPass = checkPasswordToUser($user, $hash_pwd);
+                                    //$hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
                                     $foundPass = checkPasswordToUser($user, $pwd);
+
                                     if($foundPass) {
                                         $_SESSION['user'] = $user;
                                         $_SESSION['pwd'] = $hash_pwd;
@@ -68,7 +66,8 @@ require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-
                                     }
                                     else {
                                         reject('password');
-                                    }
+                                        
+                                        }
                                     }
                                 }
                               }

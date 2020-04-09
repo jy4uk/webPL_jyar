@@ -1,6 +1,6 @@
 <?php
 require('connectdb.php');
-require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-db.php');
+require('signInPage-db.php');
 
 // $action = "list_tasks";        // default action
 ?>
@@ -80,14 +80,14 @@ require('/Applications/XAMPP/xamppfiles/htdocs/inclass7/project/todo/signInPage-
                             reject('username');
                           }
                           else {
-                            if(!empty($_POST['pwd'])) {
+                            if(isset($_POST['pwd'])) {
                                 if(!ctype_alnum($pwd)) {
                                     reject('password');
                                 }
                                 
                                 else {
-                                    // $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
-                                    $newUserCheck = newUserSignUp($user, $pwd);
+                                    $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
+                                    $newUserCheck = newUserSignUp($user, $hash_pwd);
                                     if($newUserCheck == "new user") {
                                         $_SESSION['user'] = $user;
                                         $_SESSION['pwd'] = $hash_pwd;

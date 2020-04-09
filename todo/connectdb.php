@@ -8,11 +8,11 @@
 // connecting to DB on XAMPP (local)
 
 $host = 'localhost';           // hostname
-$dbname = 'webpl-project';     // database name
+$dbname = 'webpl_final';     // database name
 
 // database credentials
 $username = 'webpl4640';
-$password = 'webpl4640!';
+$password = 'webpl4640';
 
 /******************************/
 
@@ -23,7 +23,7 @@ $db = "";
 try 
 {
    $db = new PDO($dsn, $username, $password);   
-   // echo "<h3>You are connected to the database</h3>";
+   echo "<h3>You are connected to the database</h3>";
 }
 catch (PDOException $e)     // handle a PDO exception (errors thrown by the PDO library)
 {
