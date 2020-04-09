@@ -1,3 +1,9 @@
+<?php
+require('connectdb.php');
+require('favorites-db.php');
+
+$action = "list_favorites";        // default action
+?>
 <!doctype html>
     <html>
         <head>
@@ -8,10 +14,14 @@
             </title>
         </head>
         <body>
+          <?php session_start(); ?>
+          <?php 
+            if(isset($_SESSION['user'])) {
+          ?>
             <div class = "row">
                 <div class="column">
-                    &nbsp;
-                    <!--Empty Column-->
+                    <!-- &nbsp; -->
+                    <h2>Hi, <?php echo $_SESSION['user'];?>!</h2>
                 </div>
 
                 <div class="column">
@@ -24,8 +34,10 @@
 
                 <div class="column" align="right">
                     <!--sign in button-->
-                    <button type="button" style="height: 25px; width: 100px;"
-                    onclick="window.location.href='signInPage.php';">Sign In</button>
+                    <!-- <button type="button" style="height: 25px; width: 100px;"
+                    onclick="window.location.href='signInPage.php';">Sign In</button> -->
+                    <input type="submit" value="Sign Out" name="sign-out" class="btn"
+                            onclick="window.location.href='signOut.php';"></input>
                 </div>
             </div>
             <ul>
@@ -39,8 +51,56 @@
 
             <div class="container">
                 <!-- <h1>Favorites</h1> -->
-            
-                <form name="mainform" >
+                <?php
+                    $task_to_update = '';
+
+                    if ($_SERVER['REQUEST_METHOD'] == 'GET')
+                    {
+                       include('favorites-add.php');
+                       echo "<hr/>";
+                       $favorites = getAllTasks($_SESSION['user']);
+                       include('favorites-view.php');        // default action
+                    }
+                    else if ($_SERVER['REQUEST_METHOD'] == 'POST')
+                    {
+                       if (!empty($_POST['action']) && ($_POST['action'] == 'Update'))
+                       {
+                          $task_to_update = getTaskInfo_by_id($_POST['fav_id']);   
+                          include('favorites-update.php');
+                          if (!empty($_POST['name']) && !empty($_POST['link']))
+                          {
+                             updateFavoriteInfo($_POST['name'], $_POST['link'], $_POST['fav_id']);
+                             header("Location: favorites.php?action=list_favorites");
+                          }
+                       }
+                       else if (!empty($_POST['action']) && ($_POST['action'] == 'Add'))
+                       {
+                          if (!empty($_POST['name']) && !empty($_POST['link']))
+                          {
+                             addFavorite($_SESSION['user'], $_POST['name'], $_POST['link']);
+                             header("Location: favorites.php?action=list_tasks");
+                          }
+                       }
+                       else if (!empty($_POST['action']) && ($_POST['action'] == 'Delete'))
+                       {
+                          if (!empty($_POST['fav_id']) )
+                          {
+                             deleteTask($_POST['fav_id']);
+                             header("Location: favorites.php?action=list_tasks");
+                          }
+                       }
+                    }
+
+                ?>
+                <?php
+                  }
+                  else {
+                    header('Location: signInPage.php');
+                  }
+                ?>
+
+                <!-- BEFORE PHP//HTML ONLY -->
+                <!-- <form name="mainform" >
                 
                   <div class="form-group">
                     <label for="name-of-site">Name of Site</label>
@@ -113,7 +173,7 @@
                     </script>
                     
                   </table> 
-                </div>
+                </div> -->
               </div> 
 
         </body>

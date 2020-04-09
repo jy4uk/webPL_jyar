@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="main.css" />
   
-  <title>PHP and database</title>    
+  <title>To Do</title>    
 </head>
 <body>
   
@@ -19,7 +19,7 @@
              value="<?php if (!empty($task_to_update)) echo $task_to_update['task_desc'] ?>" />        
    </div>     
    <div class="form-group">
-      <label for="duedate">Due date</label>  
+      <label for="duedate">Due date (YYYY-MM-DD)</label>  
       <input type="text" name="duedate" class="form-control" 
              value="<?php if (!empty($task_to_update)) echo $task_to_update['due_date'] ?>" />  
    </div>      

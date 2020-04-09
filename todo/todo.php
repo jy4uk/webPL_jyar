@@ -12,17 +12,21 @@ $action = "list_tasks";        // default action
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="main.css">
-  <title>PHP and database</title>    
+  <title>To Do</title>    
   <style>
     label { width: 120px; }
     textarea { border:1px solid #ddd; }
   </style>
 </head>
 <body>
+  <?php session_start(); ?>
+  <?php 
+    if(isset($_SESSION['user'])) {
+  ?>
   <div class = "row">
                 <div class="column">
-                    &nbsp;
-                    <!--Empty Column-->
+                    <!-- &nbsp; -->
+                    <h2>Hi, <?php echo $_SESSION['user'];?>!</h2>
                 </div>
 
                 <div class="column">
@@ -35,10 +39,12 @@ $action = "list_tasks";        // default action
 
                 <div class="column" align="right">
                     <!--sign in button-->
-                    <button type="button" style="height: 25px; width: 100px;"
-                    onclick="window.location.href='signInPage.php';">Sign In</button>
+                    <!-- <button type="button" style="height: 25px; width: 100px;"
+                    onclick="window.location.href='signInPage.php';">Sign In</button> -->
+                    <input type="submit" value="Sign Out" name="sign-out" class="btn"
+                            onclick="window.location.href='signOut.php';"></input>                
                 </div>
-            </div>
+    </div>
             <ul>
                 <li><a class="active" href="home.php">Home</a></li>
                 <!-- <li><a href="../classSchedule.html">Classes</a></li> -->
@@ -62,7 +68,7 @@ $action = "list_tasks";        // default action
         {
            include('todo_add.php');
            echo "<hr/>";
-           $tasks = getAllTasks();
+           $tasks = getAllTasks($_SESSION['user']);
            include('todo_view.php');        // default action
         }
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -81,7 +87,7 @@ $action = "list_tasks";        // default action
            {
               if (!empty($_POST['taskdesc']) && !empty($_POST['duedate']) && !empty($_POST['priority']))
               {
-                 addTask($_POST['taskdesc'], $_POST['duedate'], $_POST['priority']);
+                 addTask($_SESSION['user'], $_POST['taskdesc'], $_POST['duedate'], $_POST['priority']);
                  header("Location: todo.php?action=list_tasks");
               }
            }
@@ -169,6 +175,9 @@ $action = "list_tasks";        // default action
                     </table> 
                   </div>
                 </div>  -->
-  
+  <?php
+  }
+ 
+  ?>
 </body>
 </html>

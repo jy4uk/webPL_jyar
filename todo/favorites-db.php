@@ -17,41 +17,52 @@
 //      execute() actually executes the SQL statement
 
 
-function addTask($username, $task, $due, $priority)
+function addFavorite($username, $name, $link)
 {
 	global $db;
 	
-	// example SQL statement to insert data
-	// 	   INSERT INTO todo (task_desc, due_date, priority) VALUES ('submit in-class9', '2020-03-31', 'high');
-	// since we skip task_id and let DBMS auto gen a running number,
-	// we need to specify the columns to insert values
-	
-	$query = "INSERT INTO todo (username, task_desc, due_date, priority) VALUES (:username, :task, :due, :priority)";
+	$url = $link;
+	if(substr($link, 0, 7) != "http://" && substr($link, 0, 8) != "https://") {
+		$url = "http://" . $link;
+	}
+	else if(substr($link, 0, 7) != "http://" && substr($link, 0, 8) == "https://") {
+		$url = $link;
+	}
+	else if(substr($link, 0, 7) == "http://" && substr($link, 0, 8) != "https://") {
+		$url = $link;
+	}
+
+	$query = "INSERT INTO favorites (username, name, link) VALUES (:username, :name, :link)";
 	
 	$statement = $db->prepare($query);
 	$statement->bindValue(':username', $username);
-	$statement->bindValue(':task', $task);
-	$statement->bindValue(':due', $due);
-	$statement->bindValue(':priority', $priority);
+	$statement->bindValue(':name', $name);
+	$statement->bindValue(':link', $url);
 	$statement->execute();     // if the statement is successfully executed, execute() returns true
 	// false otherwise
 	
 	$statement->closeCursor();
 }
 
-function updateTaskInfo($task, $due, $priority, $id)
+function updateFavoriteInfo($name, $link, $id)
 {
 	global $db;
-	
-	// example SQL statement to update data 
-    //     UPDATE todo SET task_desc = 'new task', due_date = '2020-04-13', priority = 'normal' WHERE task_id = 2;
-	// assume task_id is a primary identifying a row of data in the table
-	
-	$query = "UPDATE todo SET task_desc=:task, due_date=:due, priority=:priority WHERE task_id=:id";
+
+	$url = $link;
+	if(substr($link, 0, 7) != "http://" && substr($link, 0, 8) != "https://") {
+		$url = "http://" . $link;
+	}
+	else if(substr($link, 0, 7) != "http://" && substr($link, 0, 8) == "https://") {
+		$url = $link;
+	}
+	else if(substr($link, 0, 7) == "http://" && substr($link, 0, 8) != "https://") {
+		$url = $link;
+	}
+
+	$query = "UPDATE favorites SET name=:name, link=:link WHERE fav_id=:id";
 	$statement = $db->prepare($query);
-	$statement->bindValue(':task', $task);
-	$statement->bindValue(':due', $due);
-	$statement->bindValue(':priority', $priority);
+	$statement->bindValue(':name', $name);
+	$statement->bindValue(':link', $url);
 	$statement->bindValue(':id', $id);
 	$statement->execute();
 	$statement->closeCursor();
@@ -61,7 +72,7 @@ function deleteTask($id)
 {
 	global $db;
 	
-	$query = "DELETE FROM todo WHERE task_id=:id";
+	$query = "DELETE FROM favorites WHERE fav_id=:id";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':id', $id);
 	$statement->execute();
@@ -69,12 +80,12 @@ function deleteTask($id)
 }
 
 
-function getAllTasks($user)
+function getAllTasks($username)
 {
 	global $db;
-	$query = "SELECT * FROM todo WHERE username=:user";
+	$query = "SELECT * FROM favorites WHERE username=:username";
 	$statement = $db->prepare($query);
-	$statement->bindValue(':user', $user);
+	$statement->bindValue(':username', $username);
 	$statement->execute();
 	
 	// fetchAll() returns an array for all of the rows in the result set
@@ -93,7 +104,7 @@ function getTaskInfo_by_id($id)
 	
 	// echo "in getTaskInfo_by_id " . $id ;
 	
-	$query = "SELECT * FROM todo where task_id = :id";
+	$query = "SELECT * FROM favorites where fav_id = :id";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':id', $id);
 	$statement->execute();
