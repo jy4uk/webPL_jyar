@@ -13,23 +13,37 @@ require('signInPage-db.php');
                 Create a new account
             </title>
             <body>
-                <div class="container">
+            <div class="container">
                     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
                         <div class="row">
                             <h2 style="text-align: center; color: black;">Create a new account</h2>
                             <div class = "column">
                                 &nbsp;
                             </div>
-                            <div class = "column" style="text-align: left;">
-                                <div style="color: black;">
-                                    Username: <input type="text" id="username" name="username" placeholder="Username" required>
+                            <div class = "column" style="text-align: center;">
+                                <div class="row" style="width=33.33%;">
+                                    <div class="column" style="width:50%; text-align: right;">
+                                        <div style="color: black;">Username:</div>
+                                    </div>
+                                    <div class="column" style="width:50%; text-align: left;">
+                                        <div style="color: black;"><input type="text" id="username" name="username" placeholder="Username" required></div>
+                                    </div>
                                 </div>
-                                <div style = "color: black;">
-                                    Password: <input type="password" name="pwd" id="password" placeholder="Password" required>
+                                <div class="row" style="width=33.33%; text-align: center;">
+                                    <div class="column" style="width:50%; text-align: right;">
+                                        <div style = "color: black;">Password:</div>
+                                    </div>
+                                    <div class="column" style="width:50%; text-align: left;">
+                                        <div style = "color: black;"><input type="password" name="pwd" id="password" placeholder="Password" required></div>
+                                    </div>
                                 </div>
-                                
-                                <div style = "color: black;">
-                                    Re-Type Password: <input type="password" id="retypePass" name="password2" placeholder="Password" required>
+                                <div class="row" style="width=33.33%; text-align: center;">
+                                    <div class="column" style="width:50%; text-align: right;">
+                                        <div style = "color: black;">Re-Type Password:</div>
+                                    </div>
+                                    <div class="column" style="width:50%; text-align: left;">
+                                        <div style = "color: black;"><input type="password" id="retypePass" name="password2" placeholder="Password" required></div>
+                                    </div>
                                 </div>
                                 <input type="submit" id="submit" value="Create Account">
                             </div>
@@ -37,18 +51,15 @@ require('signInPage-db.php');
                     </form>
                 </div>
                 <script>
-                    //javascript stuff
-                    document.getElementById("submit").addEventListener("click", checkLength);
-                    function checkLength(){
+                    // DOM manipulation, event listener, arrow function
+                    document.getElementById("submit").addEventListener("click", () => {
                         var usernameCheck = document.getElementById("username").value;
                         var usernameLength = usernameCheck.length;
                         var passwordCheck = document.getElementById("password").value;
                         var retypePassword = document.getElementById("retypePass").value;
                         var passwordLength = passwordCheck.length;
-                        console.log(usernameLength);
-                        console.log(usernameCheck);
 
-                        if (usernameLength < 4 && usernameLength != 0) {
+                        if (usernameLength < 5 && usernameLength != 0) {
                             alert("Username is too short. Must be longer than 5 characters.");
                         }
                         if(passwordLength < 5 && passwordLength != 0){
@@ -57,11 +68,10 @@ require('signInPage-db.php');
                         if(passwordCheck != retypePassword){
                             alert("Passwords do not match");
                         }
-                    }
+                    });
                 </script>
                     </div>
                 </div>
-
                 <?php session_start(); 
                 // foreach($_SESSION as $key => $value) {
                 //     echo "<li style='color: black;'> $key : $value </li>";
@@ -101,5 +111,18 @@ require('signInPage-db.php');
                           }
                       }
                 ?>
+
+            <br> </br>
+            <div class="container">
+                <div class="row">
+                    <div class="column">
+                        &nbsp;
+                    </div>
+                    <div class="column" style="text-align: center; color: black;">
+                        Already have an account? <a href="signInPage.php" style="color: black;">Sign in here.</a>
+                    </div>
+                </div>
+            </div>
+
             </body>
         </head>
