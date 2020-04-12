@@ -1,3 +1,9 @@
+<?php
+require('connectdb.php');
+require('home-db.php');
+
+$action = "list_tasks";        // default action
+?>
 <!doctype html>
     <html>
         <head>
@@ -40,7 +46,7 @@
                 <li><a href="todo.php">To Do</a></li>
                 <li><a href="favorites.php">Favorites</a></li>
             </ul>
-
+            <br/>
             <div class="row">
                 <!-- <div class="column" style="background-color:#ff8c00;">
                     <h2>
@@ -51,7 +57,7 @@
                         </center>
                     </h2>
                 </div> -->
-                <div class="column" style="background-color:blue;">
+                <div class="column" style="background-color:blue; width: 50%;">
                     <h2>
                         <center>
                             <a href="todo.php">
@@ -60,7 +66,7 @@
                         </center>
                     </h2>
                 </div>
-                <div class="column" style="background-color:#ff8c00;">
+                <div class="column" style="background-color:#ff8c00; width: 50%;">
                     <h2>
                         <center>
                             <a href="favorites.php">
@@ -69,6 +75,25 @@
                         </center>
                     </h2>
                 </div>
+            </div>
+            
+            <div class="row">
+                    <div class="column" style="background-color:#e8f4f8; width: 50%;">
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'GET') {
+                                $tasks = getAllTodo($_SESSION['user']);
+                                include('home-todo-view.php');
+                            }
+                        ?>
+                    </div>
+                    <div class="column" style="background-color:#fed8b1; width: 50%;">
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'GET') {
+                                $favorites = getAllFavorites($_SESSION['user']);
+                                include('home-favorites-view.php');
+                            }
+                        ?>
+                    </div>
             </div>
 
             <?php
