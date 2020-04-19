@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- <link rel="stylesheet" href="app.component.css"> -->
+    <meta charset="UTF-8">
+    <title>
+        Create a new account
+    </title>
+  </head>
+  <body>
+    <div class="container">
+      <form #signUp="ngForm" (ngSubmit)="onSubmit(signUp.value)">
+        <div class="row">
+          <h2 style="text-align: center; color: black;">Create a new account</h2>
+          <div class = "column">
+              &nbsp;
+          </div>
+          <div class = "column" style="text-align: center;">
+            <div class="row" >
+              <div class="column" style="width:50%; text-align: right;">
+                  <div style="color: black;">Username:</div>
+              </div>
+              <div class="column" style="width:50%; text-align: left;">
+                <div style="color: black;"><input type="text" id="username" name="username"  [(ngModel)]="signUpModel.username" placeholder="Username" required></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column" style="width:50%; text-align: right;">
+                <div style = "color: black;">Password:</div>
+              </div>
+              <div class="column" style="width:50%; text-align: left;">
+                <div style = "color: black;"><input type="password" name="pwd" id="password" [(ngModel)]="signUpModel.password" placeholder="Password" required></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column" style="width:50%; text-align: right;">
+                <div style = "color: black;">Re-Type Password:</div>
+              </div>
+              <div class="column" style="width:50%; text-align: left;">
+                <div style = "color: black;"><input type="password" id="retypePass" name="password2" [(ngModel)]="signUpModel.passwordretype" placeholder="Password" required></div>
+              </div>
+            </div>
+                <input type="submit" id="submit" value="Create Account" (click)="confirmSignUp(signUp.value)">
+            </div>
+        </div>
+      </form>
+    </div>
+        
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                &nbsp;
+            </div>
+            <div class="column" style="text-align: center; color: black;">
+                Already have an account? <a href="http://localhost/inclass7/project/todo/signInPage.php" [ngClass]="'hover-signin'">Sign in here.</a> <!-- style="color: black;" -->
+            </div>
+        </div>
+    </div>
+
+
+  <div [style.color]="'blue'" [style.font-style]="'italic'">
+    <!-- {{responsedata}} -->
+  {{ (confirm_msg.length > 0)? (responsedata) : '' }}
+  </div>
+
+
+  </body>
