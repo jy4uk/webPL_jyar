@@ -34,6 +34,27 @@ require('signInPage-db.php');
                             </div>
                         </div>
                     </form>
+                    <script>
+                        // DOM manipulation, event listener, arrow function
+                        document.getElementById("submit").addEventListener("click", () => {
+                            var usernameCheck = document.getElementById("username").value;
+                            var usernameLength = usernameCheck.length;
+                            var passwordCheck = document.getElementById("password").value;
+                            // var retypePassword = document.getElementById("retypePass").value;
+                            var passwordLength = passwordCheck.length;
+
+                            if (usernameLength < 5 && usernameLength != 0) {
+                                alert("Username is too short. Must be longer than 5 characters.");
+                            }
+                            if(passwordLength < 5 && passwordLength != 0){
+                                alert("Password is too short. Must be longer than 5 characters");
+                            }
+                            // if(passwordCheck != retypePassword){
+                            //     alert("Passwords do not match");
+                            // }
+                        });
+                    </script>
+
                     <?php session_start(); ?>
                     <?php
 
