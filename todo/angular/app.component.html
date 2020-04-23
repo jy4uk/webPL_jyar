@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
   <head>
-    <!-- <link rel="stylesheet" href="app.component.css"> -->
     <meta charset="UTF-8">
     <title>
         Create a new account
@@ -11,12 +10,10 @@
     <div class="container">
       <h2 style="text-align: center; color: black;">Create a new account</h2>
       <div style="text-align: center; color: blue;" *ngIf="confirm_msg.length == 0">Fill out the following fields to create your account!</div>
-      <div style="text-align: center; color: #ff8c00;" *ngIf="confirm_msg.length > 0">Make sure your username and password are 5 or more characters long, and choose a unique username!</div>
+      <div style="text-align: center; color: #ff8c00;" *ngIf="confirm_msg.length > 0">Check below for your next steps!</div>
       <br/>
       <form #signUp="ngForm" (ngSubmit)="onSubmit(signUp.value)">
-        
         <div class="row">
-          
           <div class = "column">
               &nbsp;
           </div>
@@ -24,8 +21,6 @@
             <div class="row" >
               <div class="column" style="width:50%; text-align: right;">
                 <div style="color: black;">Username:</div>
-                <!-- <small *ngIf="responsedata instanceof SignUp && responsedata == 'Username is already taken. Please enter a different one.'" style="color: blue">Choose a different username!</small>
-                <small *ngIf="responsedata instanceof SignUp && responsedata == 'Username and password must both be more than 5 characters long.'" style="color: #ff8c00">Make sure your username is 5 or more characters long!</small> -->
               </div>
               <div class="column" style="width:50%; text-align: left;">
                 <div style="color: black;"><input type="text" id="username" name="username" [(ngModel)]="signUpModel.username" placeholder="Username" required></div>
@@ -34,7 +29,6 @@
             <div class="row">
               <div class="column" style="width:50%; text-align: right;">
                 <div style = "color: black;">Password:</div>
-                <!-- <small *ngIf="responsedata instanceof string && responsedata == 'Username and password must both be more than 5 characters long.'" style="color: #ff8c00">Make sure your password is 5 or more characters long!</small> -->
               </div>
               <div class="column" style="width:50%; text-align: left;">
                 <div style = "color: black;"><input type="password" name="pwd" id="password" [(ngModel)]="signUpModel.password" placeholder="Password" required></div>
@@ -68,11 +62,9 @@
 
     <br/>
   <div [style.font-style]="'italic'" [style.text-align]="'center'" [ngSwitch]="responsedata">
+    <div *ngSwitchCase="'Account successfully created. Click here to log in with your new account!'" ><a href="http://localhost/inclass7/project/todo/home.php" style="color: green;">{{ (confirm_msg.length > 0)? (responsedata) : '' }}</a></div>
     <div *ngSwitchCase="'Username and password must both be more than 5 characters long.'" style="color: #ff8c00;">{{ (confirm_msg.length > 0)? (responsedata) : '' }}</div>
     <div *ngSwitchCase="'Username is already taken. Please enter a different one.'" style="color: blue;">{{ (confirm_msg.length > 0)? (responsedata) : '' }}</div>
   </div>
-  <!-- <div [style.color]="'red'" *ngIf="username.invalid || username.touched">
-    Username required
-  </div> -->
 
   </body>

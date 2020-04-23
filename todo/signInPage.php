@@ -1,8 +1,6 @@
 <?php
 require('connectdb.php');
 require('signInPage-db.php');
-
-// $action = "list_tasks";        // default action
 ?>
 <!doctype html>
     <html>
@@ -22,12 +20,12 @@ require('signInPage-db.php');
                             </div>
                             <div class = "column" style="text-align: center;">
                                 <div style="color: black;">
-                                    Username: <input type="text" name="username" placeholder="Username" required/>
+                                    Username: <input type="text" name="username" id="username" placeholder="Username" required/>
                                 </div>
                                 <div style = "color: black;">
-                                    Password: <input type="password" name="pwd" placeholder="Password" required/>
+                                    Password: <input type="password" name="pwd" id="password" placeholder="Password" required/>
                                 </div>
-                                <input type="submit" value="Login" class="btn btn-light"/>
+                                <input type="submit" id="submit" value="Login" class="btn btn-light"/>
                             </div>
                             <div class = "column">
                                 &nbsp;
@@ -35,25 +33,21 @@ require('signInPage-db.php');
                         </div>
                     </form>
                     <script>
-                        // DOM manipulation, event listener, arrow function
-                        document.getElementById("submit").addEventListener("click", () => {
-                            var usernameCheck = document.getElementById("username").value;
-                            var usernameLength = usernameCheck.length;
-                            var passwordCheck = document.getElementById("password").value;
-                            // var retypePassword = document.getElementById("retypePass").value;
-                            var passwordLength = passwordCheck.length;
+                    // DOM manipulation, event listener, arrow function
+                    document.getElementById("submit").addEventListener("click", () => {
+                        var usernameCheck = document.getElementById("username").value;
+                        var usernameLength = usernameCheck.length;
+                        var passwordCheck = document.getElementById("password").value;
+                        var passwordLength = passwordCheck.length;
 
-                            if (usernameLength < 5 && usernameLength != 0) {
-                                alert("Username is too short. Must be longer than 5 characters.");
-                            }
-                            if(passwordLength < 5 && passwordLength != 0){
-                                alert("Password is too short. Must be longer than 5 characters");
-                            }
-                            // if(passwordCheck != retypePassword){
-                            //     alert("Passwords do not match");
-                            // }
-                        });
-                    </script>
+                        if (usernameLength < 5 && usernameLength != 0) {
+                            alert("Username is too short. Must be longer than 5 characters.");
+                        }
+                        if(passwordLength < 5 && passwordLength != 0){
+                            alert("Password is too short. Must be longer than 5 characters");
+                        }
+                    });
+                </script>
 
                     <?php session_start(); ?>
                     <?php
@@ -62,10 +56,10 @@ require('signInPage-db.php');
                             echo "<ul style='text-align: center; color: white;'>Incorrect " . $entry . ". Please try again or create an account.</ul>";
                           }
                       
-                          if($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) > 0) {
+                          if($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) >= 5 && strlen($_POST['pwd']) >= 5) {
                               $user = trim($_POST['username']);
                               $foundUser = getUser_by_username($user);
-                              if(!ctype_alnum($user) || !$foundUser) {//ctype_alnum checks if string is made of only alphanumeric characters (true if yes, false if not)
+                              if(!ctype_alnum($user) || !$foundUser) {
                                 reject('username');
                               }
                               else {
@@ -103,7 +97,7 @@ require('signInPage-db.php');
                         <div class="column">
                             <div class="row">
                                 <div class="column" width="11%" style="text-align: center;">
-                                    <a href="signUp.php" style="color:black" class="btn">Sign Up</a>
+                                    <a href="http://localhost:4200" style="color:black" class="btn">Sign Up</a>
                                 </div>
                                 <div class = "column" width="11%">
                                     &nbsp;

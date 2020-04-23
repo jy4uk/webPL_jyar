@@ -87,7 +87,6 @@ require('signInPage-db.php');
                           $pwd = trim($_POST['pwd']);
                           $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
                           $newUserCheck = newUserSignUp($user, $hash_pwd);
-
                           if(!ctype_alnum($user) || $newUserCheck == "user found") {//ctype_alnum checks if string is made of only alphanumeric characters (true if yes, false if not)
                             reject('username');
                           }
@@ -98,6 +97,7 @@ require('signInPage-db.php');
                                 }
                                 
                                 else {
+                                    
                                     if($newUserCheck == "new user") {
                                         $_SESSION['user'] = $user;
                                         $_SESSION['pwd'] = $hash_pwd;
