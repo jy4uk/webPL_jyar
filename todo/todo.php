@@ -5,7 +5,6 @@ require('todo-db.php');
 $action = "list_tasks";        // default action
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +24,6 @@ $action = "list_tasks";        // default action
   ?>
   <div class = "row">
                 <div class="column">
-                    <!-- &nbsp; -->
                     <h2>Hi, <?php echo $_SESSION['user'];?>!</h2>
                 </div>
 
@@ -38,22 +36,16 @@ $action = "list_tasks";        // default action
                 </div>
 
                 <div class="column" align="right">
-                    <!--sign in button-->
-                    <!-- <button type="button" style="height: 25px; width: 100px;"
-                    onclick="window.location.href='signInPage.php';">Sign In</button> -->
                     <input type="submit" value="Sign Out" name="sign-out" class="btn"
                             onclick="window.location.href='signOut.php';"></input>                
                 </div>
     </div>
             <ul>
                 <li><a class="active" href="home.php">Home</a></li>
-                <!-- <li><a href="../classSchedule.html">Classes</a></li> -->
                 <li><a href="todo.php">To Do</a></li>
                 <li><a href="favorites.php">Favorites</a></li>
             </ul>
-            <!-- <button type="button" onclick="window.location.href='todoAdd.html';">Add Tasks</button> -->
-            
-            
+
             <script>
                 function setFocus(){
                   document.getElementById("taskdesc").focus();
@@ -103,81 +95,8 @@ $action = "list_tasks";        // default action
         ?>
       
   </div>
- <!-- <div class="container" style="background-color: white; color: black;">
-                  <form name="mainform" >
-                  
-                    <div class="form-group">
-                      <label for="taskdesc">Task Description</label>
-                      <input type="text" id="taskdesc" class="form-control" name="desc" />
-                      <span class="error" id="taskdesc-note"></span>        
-                    </div>
-                    
-                    <div class="form-group">
-                      <label for="duedate">Due Date</label>  
-                      <input type="text" id="duedate" class="form-control" />  
-                      <span class="error" id="duedate-note"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                      <label for="priority">Priority</label>
-                      <select id="priority" class="form-control" >
-                        <option value="Normal" selected="selected">Normal</option> 
-                        <option value="High">High</option>
-                      </select>
-                    </div>     
-                              
-                    <input type="button" class="btn btn-light" id="add" value="Add Task" onclick="addRow()"/> 
-                  </form>
-              
-                  <br/>
-                  <div id="todo">
-                    <table id="todoTable" class="table" >
-                      <thead>   
-                        <tr>
-                          <th>Task Description</th>
-                          <th>Due Date</th>
-                          <th>Priority</th>
-                          <th>(Remove)</th>
-                        </tr> 
-                      </thead>
-              
-                      <script>
-                        function addRow(){
-                          var task = document.getElementById("taskdesc").value;
-                          var duedate = document.getElementById("duedate").value;
-                          var priority = document.getElementById("priority").value;
-                          var deleteBut = "<input type:=button value='  X  ' onClick='delRow()'>";
-                          var rowdata = [task, duedate, priority, deleteBut];
-              
-                          var tableRef = document.getElementById("todoTable");
-                          var newRow = tableRef.insertRow(tableRef.rows.length);
-                          newRow.onmouseover = () => {tableRef.clickedRowIndex = this.rowIndex}
-                          var newCell = "";       
-                          var i = 0;          
-                          while (i < 4){
-                            newCell = newRow.insertCell(i);           
-                            newCell.innerHTML = rowdata[i];          
-                            newCell.onmouseover = this.rowIndex;      
-                            i++;
-                          }
-                          document.getElementById("taskdesc").value = '';
-                          document.getElementById("duedate").value = '';
-                          document.getElementById("priority").value = '';
-
-                        }
-                        
-                        
-                        function delRow(){
-                          document.getElementById("todoTable").deleteRow(document.getElementById("todoTable").clickedRowIndex)
-                        }
-                      </script>
-                      
-                    </table> 
-                  </div>
-                </div>  -->
   <?php
-  }
- 
+    }
   ?>
 </body>
 </html>

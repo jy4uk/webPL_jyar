@@ -3,51 +3,28 @@
 function getUser_by_username($username)
 {
 	global $db;
-	
-	// echo "in getTaskInfo_by_id " . $id ;
-	
 	$query = "SELECT * FROM users where username = :username";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':username', $username);
 	$statement->execute();
-	
-	// fetchAll() returns an array for all of the rows in the result set
-	// fetch() return a row
 	$results = $statement->fetch();
-	
-	// closes the cursor and frees the connection to the server so other SQL statements may be issued
     $statement->closecursor();
-    // echo implode($results) . "<br/> "; //view user and password
-    //echo implode($results);
-    //echo “<h3 style=‘color: black;’>” . implode($results) . “</h3>”;
     if($results == NULL) {
         return false;
     }
 	return true;
-	// return $results;
 }
 
 function checkPasswordToUser($username, $password)
 {
-    // echo "entered checkPasswordToUser function";
 	global $db;
-	
-	// echo "in getTaskInfo_by_id " . $id ;
-	
 	$query = "SELECT password FROM users where username = :username";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':username', $username);
 	$statement->execute();
-	
     $results = $statement->fetch();
-
-    // $hash_results = password_hash($results[0], PASSWORD_DEFAULT);
-    // echo $hash_results . "<br/>";
-    // echo $password;
     $statement->closecursor();
     $hashpwd = $results[0];
-    //echo $hashpwd . "<br/>";
-    //echo $password;
     if(password_verify($password, $hashpwd)) {
         return true;
     }
@@ -55,7 +32,6 @@ function checkPasswordToUser($username, $password)
         return false;
     }
 	return false;
-	// return $results;
 }
 
 function newUserSignUp($username, $hashed_pw) {

@@ -54,7 +54,6 @@ function updateFavoriteInfo($name, $link, $id)
 function deleteTask($id)
 {
 	global $db;
-	
 	$query = "DELETE FROM favorites WHERE fav_id=:id";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':id', $id);
@@ -70,13 +69,8 @@ function getAllTasks($username)
 	$statement = $db->prepare($query);
 	$statement->bindValue(':username', $username);
 	$statement->execute();
-	
-	// fetchAll() returns an array for all of the rows in the result set
 	$results = $statement->fetchAll();
-	
-	// closes the cursor and frees the connection to the server so other SQL statements may be issued
 	$statement->closecursor();
-	
 	return $results;
 }
 
@@ -84,21 +78,12 @@ function getAllTasks($username)
 function getTaskInfo_by_id($id)
 {
 	global $db;
-	
-	// echo "in getTaskInfo_by_id " . $id ;
-	
 	$query = "SELECT * FROM favorites where fav_id = :id";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':id', $id);
 	$statement->execute();
-	
-	// fetchAll() returns an array for all of the rows in the result set
-	// fetch() return a row
 	$results = $statement->fetch();
-	
-	// closes the cursor and frees the connection to the server so other SQL statements may be issued
 	$statement->closecursor();
-	
 	return $results;
 }
 

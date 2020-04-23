@@ -8,20 +8,15 @@
             </title>
         </head>
 <body>
-  
   <div class="container">
     <table class="table table-striped table-bordered">
       <tr>
-<!--         <th>Website Name</th> -->
         <th>Favorite Site</th>
         <th>(Update?)</th>
         <th>(Delete?)</th>
       </tr>      
       <?php foreach ($favorites as $favorite): ?>
       <tr>
-        <!-- <td>
-          <?php echo $favorite['name']; // refer to column name in the table ?> 
-        </td> -->
         <td>
           <a href="<?php echo $favorite['link']; ?> " style='color:blue' target="_blank"><?php echo $favorite['name']; // refer to column name in the table ?> </a>
         </td>                   
@@ -40,9 +35,6 @@
       </tr>
       <?php endforeach; ?>
     </table>
-    
   </div>
-  
-  
 </body>
 </html>
